@@ -1,26 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
-[System.Serializable]
-
-public class WeatherData 
+public class ReadData : MonoBehaviour
 {
-    public string name;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
 
-    public ParticleSystem particleSystem;
+        using(var reader = new StreamReader(@"D:\EGIOC\Prototype_Weather_Simulator\Assets\Files"))
+        {
+            List<string> listA = new List<string>();
+            
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                var values = line.Split(',');
 
-    //[HideInInspector]
-    public ParticleSystem.EmissionModule emission;
-
-    public bool useAudio;
-    public AudioClip weatherAudio;
-    public float audioFadeInTimer, lightIntensity, lightDimTimer, fogChangeSpeed;
-
-    public Transform windzone;
-
-    public Color fogColor, currentForColor;
+                listA.Add(values[0]);
+            }
+        }
+    }
     
-    
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
-
